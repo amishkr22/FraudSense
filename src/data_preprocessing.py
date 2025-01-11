@@ -1,13 +1,25 @@
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
+import numpy as np
+import pickle
 
-def load_and_preprocess_data(file_path):
-    data = pd.read_csv(file_path)
-    data['NormAmount'] = StandardScaler().fit_transform(data['Amount'].values.reshape(-1, 1))
-    data = data.drop(['Amount', 'Time'], axis=1)
-    return data
+# Load the scaler
+with open("scaler.pkl", "rb") as file:
+    scaler = pickle.load(file)
 
-def split_data(data):
-    fraud_data = data[data['Class'] == 1]
-    non_fraud_data = data[data['Class'] == 0]
-    return fraud_data, non_fraud_data
+def preprocess_user_input(amount, time, pca_features):
+    """
+    Preprocess user input to match the model's expected input format.
+
+    Args:
+        amount (float): Transaction amount.
+        time (float): Transaction time.
+        pca_features (list): PCA-transformed features (V1 to V28).
+
+    Returns:
+        np.array: Preprocessed input ready for the model.
+    """
+    # Normalize the amount
+    norm_amount = scaler.transform([[amount]])[0, 0]
+
+    # Combine all features
+    input_features = [time, norm_amount] + pca_features
+    return np.array(input_features).reshape(1, -1)
