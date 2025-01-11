@@ -1,0 +1,9 @@
+langchain
+openai
+chromadb
+streamlit
+scikit-learn
+sentence-transformers
+pandas
+numpy
+langchain-community
