@@ -7,3 +7,5 @@ sentence-transformers
 pandas
 numpy
 langchain-community
+matplotlib
+seaborn
