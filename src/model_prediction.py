@@ -1,25 +1,14 @@
 import pickle
 
-def load_model(model_path):
-    """
-    Load the trained fraud detection model.
+# Load the trained model
+with open("fraud_model.pkl", "rb") as file:
+    model = pickle.load(file)
 
-    Args:
-        model_path (str): Path to the model file.
-
-    Returns:
-        object: Loaded model.
-    """
-    with open(model_path, "rb") as file:
-        model = pickle.load(file)
-    return model
-
-def predict_fraud(model, preprocessed_input):
+def predict_fraud(preprocessed_input):
     """
     Predict whether a transaction is fraudulent.
 
     Args:
-        model (object): Trained fraud detection model.
         preprocessed_input (np.array): Preprocessed input data.
 
     Returns:

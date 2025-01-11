@@ -21,5 +21,5 @@ def preprocess_user_input(amount, time, pca_features):
     norm_amount = scaler.transform([[amount]])[0, 0]
 
     # Combine all features
-    input_features = [time, norm_amount] + pca_features
+    input_features = [norm_amount] + pca_features
     return np.array(input_features).reshape(1, -1)

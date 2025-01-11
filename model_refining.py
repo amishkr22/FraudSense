@@ -17,7 +17,7 @@ data = data.drop(['Amount', 'Time'], axis=1)
 # Split features and target
 X = data.drop(['Class'], axis=1)
 Y = data['Class']
-
+X.shape
 # Split data into training and testing sets
 xTrain, xTest, yTrain, yTest = train_test_split(X, Y, test_size=0.2, random_state=42)
 
